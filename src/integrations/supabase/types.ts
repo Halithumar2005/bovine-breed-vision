@@ -14,7 +14,113 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      classifications: {
+        Row: {
+          breed_prediction: string
+          confidence: number
+          created_at: string | null
+          id: string
+          image_url: string
+          top_predictions: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          breed_prediction: string
+          confidence: number
+          created_at?: string | null
+          id?: string
+          image_url: string
+          top_predictions?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          breed_prediction?: string
+          confidence?: number
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          top_predictions?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "classifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      surveys: {
+        Row: {
+          accuracy_rating: number | null
+          classification_id: string | null
+          created_at: string | null
+          feedback: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          accuracy_rating?: number | null
+          classification_id?: string | null
+          created_at?: string | null
+          feedback?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          accuracy_rating?: number | null
+          classification_id?: string | null
+          created_at?: string | null
+          feedback?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "surveys_classification_id_fkey"
+            columns: ["classification_id"]
+            isOneToOne: false
+            referencedRelation: "classifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "surveys_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
