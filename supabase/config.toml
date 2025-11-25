@@ -1,1 +1,4 @@
 project_id = "sxgmodiysolkivebtuvg"
+
+[functions.moo-chat]
+verify_jwt = false
